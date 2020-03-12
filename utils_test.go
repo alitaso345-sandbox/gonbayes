@@ -31,3 +31,29 @@ func TestIsStopWord(t *testing.T) {
 		})
 	}
 }
+
+func TestStem(t *testing.T) {
+	tests := []struct {
+		name, word, want string
+	}{
+		{
+			name: "stemming swin",
+			word: "swims",
+			want: "swim",
+		},
+		{
+			name: "stemminh ceiling",
+			word: "ceiling",
+			want: "ceil",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := gonbayes.Stem(tt.word)
+			if got != tt.want {
+				t.Errorf("want = %v, got = %v\n", tt.want, got)
+			}
+		})
+	}
+}
