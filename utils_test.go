@@ -1,7 +1,9 @@
 package gonbayes_test
 
-import "testing"
-import "github.com/alitso345-sandbox/gonbayes"
+import (
+	"github.com/alitaso345-sandbox/gonbayes"
+	"testing"
+)
 
 func TestIsStopWord(t *testing.T) {
 	tests := []struct {
