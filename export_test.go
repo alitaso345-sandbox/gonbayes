@@ -1,3 +1,3 @@
 package gonbayes
 
-var IsStopWord = isStopWord
+var IsStopWords = isStopWords

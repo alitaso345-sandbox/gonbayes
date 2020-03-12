@@ -24,7 +24,7 @@ func TestIsStopWord(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got := gonbayes.IsStopWord(tt.word)
+			got := gonbayes.IsStopWords(tt.word)
 			if got != tt.want {
 				t.Errorf("want = %v, got = %v", tt.want, got)
 			}

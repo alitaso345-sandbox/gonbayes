@@ -1,6 +1,6 @@
 package gonbayes
 
-func isStopWord(word string) bool {
+func isStopWords(word string) bool {
 	_, ok := stopWords[word]
 	return ok
 }
