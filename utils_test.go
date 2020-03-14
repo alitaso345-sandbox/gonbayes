@@ -57,3 +57,24 @@ func TestStem(t *testing.T) {
 		})
 	}
 }
+
+func TestClean(t *testing.T) {
+	tests := []struct {
+		name, word, want string
+	}{
+		{
+			name: "clean",
+			word: "You are the best friend!!!!!!(^^)",
+			want: "you are the best friend",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := gonbayes.Clean(tt.word)
+			if got != tt.want {
+				t.Errorf("want = %v, got = %v\n", tt.want, got)
+			}
+		})
+	}
+}
