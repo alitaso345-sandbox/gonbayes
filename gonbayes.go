@@ -1,5 +1,7 @@
 package gonbayes
 
+import "sort"
+
 // Classifier is document categories classifier
 type Classifier struct {
 	Words                  map[string]map[string]uint64 // カテゴリそれぞれの各単語の数
@@ -71,5 +73,22 @@ func (c *Classifier) P(document string) map[string]float64 {
 }
 
 func (c *Classifier) Classify(document string) (category string) {
-	// TODO: implement
+	// 各カテゴリ毎のP(C|D)を計算
+	prob := c.P(document)
+
+	// P(C|D)の値でソート
+	type pm struct {
+		category    string
+		probability float64
+	}
+	var ps []pm
+	for c, p := range prob {
+		ps = append(ps, pm{c, p})
+	}
+	sort.Slice(ps, func(i, j int) bool {
+		return ps[i].probability > ps[j].probability
+	})
+
+	// 最も高いカテゴリを返す
+	return ps[0].category
 }
