@@ -25,7 +25,13 @@ func NewClassifier(categories []string) *Classifier {
 }
 
 func (c *Classifier) Train(category string, document string) {
-	// TODO: implement
+	for word, count := range countWords(document) {
+		c.Words[category][word] += uint64(count)
+		c.TotalWordsInCategories[category] += uint64(count)
+		c.TotalWords += uint64(count)
+	}
+	c.TotalDocsInCategories[category]++
+	c.TotalDocs++
 }
 
 func (c *Classifier) Classify(document string) (category string) {
