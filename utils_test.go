@@ -2,6 +2,7 @@ package gonbayes_test
 
 import (
 	"github.com/alitaso345-sandbox/gonbayes"
+	"reflect"
 	"testing"
 )
 
@@ -73,6 +74,33 @@ func TestClean(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			got := gonbayes.Clean(tt.word)
 			if got != tt.want {
+				t.Errorf("want = %v, got = %v\n", tt.want, got)
+			}
+		})
+	}
+}
+
+func TestCountWords(t *testing.T) {
+	tests := []struct {
+		name string
+		word string
+		want map[string]int
+	}{
+		{
+			name: "count words",
+			word: "I say hello. You say hi.",
+			want: map[string]int{
+				"say":   2,
+				"hello": 1,
+				"hi":    1,
+			},
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := gonbayes.CountWords(tt.word)
+			if !reflect.DeepEqual(got, tt.want) {
 				t.Errorf("want = %v, got = %v\n", tt.want, got)
 			}
 		})

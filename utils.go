@@ -27,3 +27,16 @@ func clean(document string) string {
 	document = strings.ToLower(document)
 	return re.ReplaceAllString(document, "")
 }
+
+func countWords(document string) (wordCount map[string]int) {
+	document = clean(document)
+	words := strings.Split(document, " ")
+	wordCount = make(map[string]int)
+	for _, word := range words {
+		if !isStopWords(word) {
+			key := stem(strings.ToLower(word))
+			wordCount[key]++
+		}
+	}
+	return
+}
